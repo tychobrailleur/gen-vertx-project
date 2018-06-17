@@ -9,7 +9,7 @@ local projectDir = getWorkingPath() + project.name;
 createDirectory(projectDir);
 
 // Create pom.xml
-generate("pom.xml.cwt", project, projectDir + "/pom.xml");
+generate("templates/pom.xml.cwt", project, projectDir + "/pom.xml");
 createDirectory(projectDir + "/src/main/groovy/" + replaceString(".", "/", project.group));
 
 // create .gitignore
