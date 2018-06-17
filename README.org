@@ -1,0 +1,5 @@
+Generate a Groovy Vert.x 3 project using [[http://codeworker.free.fr/][CodeWorker]].
+
+* License
+
+(c) 2018 Sébastien Le Callonnec.  Licensed under GPLv3.
