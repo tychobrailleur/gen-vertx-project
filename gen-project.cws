@@ -13,10 +13,10 @@ generate("pom.xml.cwt", project, projectDir + "/pom.xml");
 createDirectory(projectDir + "/src/main/groovy/" + replaceString(".", "/", project.group));
 
 // create .gitignore
-generate("gitignore.cwt", project, projectDir + "/.gitignore");
+generate("templates/gitignore.cwt", project, projectDir + "/.gitignore");
 
 // Create the Main verticle
-generate("Main.groovy.cwt", project, projectDir + "/src/main/groovy/"
+generate("templates/Main.groovy.cwt", project, projectDir + "/src/main/groovy/"
                             + replaceString(".", "/", project.group) + "/Main.groovy");
 
 // Create the different Verticles
@@ -24,6 +24,6 @@ foreach v in project.verticles {
         local verticle;
         insert verticle.name = v;
         insert verticle.package = project.group;
-        generate("Verticle.groovy.cwt", verticle, projectDir + "/src/main/groovy/"
+        generate("templates/Verticle.groovy.cwt", verticle, projectDir + "/src/main/groovy/"
                             + replaceString(".", "/", project.group) + "/" + v + ".groovy");
 }
