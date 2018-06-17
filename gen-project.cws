@@ -1,0 +1,33 @@
+traceLine("Generate project...");
+
+parseAsBNF("project-desc.cwp", project, "project.txt");
+saveProject("tree.xml");
+
+traceLine("Create directory " + project.props['name']);
+
+local projectDir = getWorkingPath() + project.props['name'];
+createDirectory(projectDir);
+
+// Create pom.xml
+generate("pom.xml.cwt", project, projectDir + "/pom.xml");
+createDirectory(projectDir + "/src/main/groovy/" + replaceString(".", "/", project.props['group']));
+
+// create .gitignore
+generate("gitignore.cwt", project, projectDir + "/.gitignore");
+
+// Create the Main verticle
+generate("Main.groovy.cwt", project, projectDir + "/src/main/groovy/"
+                            + replaceString(".", "/", project.props['group']) + "/Main.groovy");
+
+// Create the different Verticles
+local verticles;
+cutString(this.props['verticles'], ",", verticles);
+foreach v in verticles {
+        local verticleName = v;
+        trim(verticleName);
+        local verticle;
+        insert verticle.name = verticleName;
+        insert verticle.package = this.props['group'];
+        generate("Verticle.groovy.cwt", verticle, projectDir + "/src/main/groovy/"
+                            + replaceString(".", "/", project.props['group']) + "/" + verticleName + ".groovy");
+}

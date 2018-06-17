@@ -1,0 +1,20 @@
+#noCase
+
+properties ::=
+           #ignore(blanks)
+           #continue
+           [ #pushItem(this) property(this#back) ]+
+           #empty;
+
+property(project:node) ::=
+         #readIdentifier:propName
+         #continue
+         ':' VAL:propValue
+         ';'
+           => {
+              insert project.props[propName] = propValue;
+              traceLine(propName + ": " + propValue);
+           };
+
+
+VAL:value ::= #!ignore #continue [['a'..'z' | 'A'..'Z' | '.' | ',' | ' ' ]]+:VAL;

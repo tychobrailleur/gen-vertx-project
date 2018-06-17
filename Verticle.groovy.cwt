@@ -1,0 +1,22 @@
+package @this.package@
+
+import io.vertx.core.AbstractVerticle
+import io.vertx.core.Future
+import io.vertx.core.json.JsonObject
+import io.vertx.core.logging.LoggerFactory
+import io.vertx.rabbitmq.RabbitMQClient
+
+class @this.name@ extends AbstractVerticle {
+
+    def log = LoggerFactory.getLogger(this.class)
+
+    \@Override
+    void start(Future<Void> future) {
+        log.info('Starting...')
+
+        JsonObject config = config()
+
+        // Write your verticle here:
+
+    }
+}
