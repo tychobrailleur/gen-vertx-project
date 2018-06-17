@@ -1,19 +1,41 @@
 #noCase
 
 properties ::=
-           #ignore(blanks)
            #continue
-           [ #pushItem(this) property(this#back) ]+
+           [ property(this) ]+
            #empty;
 
 property(project:node) ::=
          #readIdentifier:propName
-         #continue
-         ':' VAL:propValue
-         ';'
+         #continue propStatement<propName>(project) '\n';
+
+propStatement<"name">(project:node) ::=
+         ':' #continue VAL:propValue
            => {
-              insert project.props[propName] = propValue;
-              traceLine(propName + ": " + propValue);
+              trim(propValue);
+              insert project.name = propValue;
+              traceLine("name: " + propValue);
+           };
+
+propStatement<"group">(project:node) ::=
+         ':' #continue VAL:propValue
+           => {
+              trim(propValue);
+              insert project.group = propValue;
+              traceLine("group: " + propValue);
+           };
+
+propStatement<"verticles">(project:node) ::=
+         ':' #continue VAL:propValue
+           => {
+           local verticleNames;
+           cutString(propValue, ",", verticleNames);
+           foreach v in verticleNames {
+                   local verticleName = v;
+                   trim(verticleName);
+                   pushItem project.verticles;
+                   project.verticles#back = verticleName;
+           }
            };
 
 

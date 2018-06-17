@@ -1,4 +1,4 @@
-package @this.props['group']@
+package @this.group@
 
 import io.vertx.core.Vertx
 import io.vertx.config.ConfigRetriever
@@ -32,12 +32,8 @@ class Main {
                     JsonObject config = json.result()
                     log.debug("Starting the app with config: ${json}")
                     @
-                    local verticles;
-                    cutString(this.props['verticles'], ",", verticles);
-                    foreach v in verticles {
-                            local verticleName = v;
-                            trim(verticleName);
-@vertx.deployVerticle('groovy:@this.props['group']@.@verticleName@', new DeploymentOptions().setConfig(config))
+                    foreach v in this.verticles {
+@vertx.deployVerticle('groovy:@this.group@.@v@', new DeploymentOptions().setConfig(config))
 @ } /* end of foreach */
 @                } else {
                     log.error("Error retrieving configuration.")
