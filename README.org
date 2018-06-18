@@ -1,5 +1,19 @@
 Generate a Groovy Vert.x 3 project using [[http://codeworker.free.fr/][CodeWorker]].
 
+Currently the generated project contains:
+
+- A Maven =pom.xml= file configured to use Vert.x 3.5.2 with Groovy;
+- A =Main= groovy class starting the application and deploying the Verticles;
+- Verticles defined in the project file;
+- =.gitignore=.
+
+To create the project, change the =project.txt= file at the root, and set the following properties:
+
+- =name= :: Name of the application
+- =group= :: Maven group, this will also be used as the Groovy package name
+- =verticles= :: Comma-separated list of Verticles to create and deploy.
+
+
 * License
 
 (c) 2018 Sébastien Le Callonnec.  Licensed under GPLv3.
