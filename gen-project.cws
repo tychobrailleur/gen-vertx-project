@@ -19,6 +19,11 @@ generate("templates/gitignore.cwt", project, projectDir + "/.gitignore");
 generate("templates/Main.groovy.cwt", project, projectDir + "/src/main/groovy/"
                             + replaceString(".", "/", project.group) + "/Main.groovy");
 
+// Create the ApplicationVerticle verticle
+generate("templates/ApplicationVerticle.groovy.cwt", project, projectDir + "/src/main/groovy/"
+                            + replaceString(".", "/", project.group) + "/ApplicationVerticle.groovy");
+
+
 // Create the different Verticles
 foreach v in project.verticles {
         local verticle;
